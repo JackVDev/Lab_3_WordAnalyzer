@@ -18,6 +18,11 @@ class WordAnalyzer:
     
     def process_file(self):
         #Count how many times each word appears in specified file
+        try:
+            raw_text = self.__filepath.read_text(errors="replace")
+        except FileNotFoundError:
+            print("This file does not exist!") # figure out actual error prevention
+            
         raise NotImplementedError # NOT FINISHED
     
     def print_report(self):
