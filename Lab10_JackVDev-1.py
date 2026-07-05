@@ -44,3 +44,25 @@ class WordAnalyzer:
         self.__wordfreq = dict(sorted(self.__wordfreq.items())) # Sorts __wordfreq alphabetically by key
         for word, freq in self.__wordfreq.items():
             print(f"{word:<15} :: {freq:>3}")
+
+def main():
+    # Do Stuff
+    listoffiles = {"1": "princess_mars.txt", "2": "Tarzan.txt", "3": "treasure_island.txt", "4": "monte_cristo.txt"}
+    validinputs = {"1": "Princess Mars", "2": "Tarzan", "3": "Treasure Island", "4": "Monte Cristo", "5": "Exit"}
+    usercontinue = True
+    while usercontinue:
+        print("--- Word Analyzer ---")
+        for k, v in validinputs.items():
+            print(f"{k}. {v}")
+        userchoice = input("\nPlease enter your choice (1-5): ")
+        if userchoice in list(validinputs.keys()):
+            if userchoice == "5":
+                usercontinue = False
+            else:
+                print("Continue with program")
+        else:
+            print("Invalid input")
+
+
+if __name__ == "__main__":
+    main()
