@@ -51,7 +51,7 @@ def main():
     validinputs = {"1": "Princess Mars", "2": "Tarzan", "3": "Treasure Island", "4": "Monte Cristo", "5": "Exit"}
     usercontinue = True
     while usercontinue:
-        print("--- Word Analyzer ---")
+        print("\n--- Word Analyzer ---")
         for k, v in validinputs.items():
             print(f"{k}. {v}")
         userchoice = input("\nPlease enter your choice (1-5): ")
@@ -59,9 +59,16 @@ def main():
             if userchoice == "5":
                 usercontinue = False
             else:
-                print("Continue with program")
+                print(f"Processing {listoffiles[userchoice]}...\n")
+                analysis = WordAnalyzer(listoffiles[userchoice])
+                if analysis.process_file():
+                    analysis.print_report()
+                else:
+                    print(f"The file {listoffiles[userchoice]} does not exist in this folder.")
+                input("\nPress Enter to return to the menu...")
         else:
-            print("Invalid input")
+            print("Invalid Input\nPlease input a number from 1-5.")
+    print("\nGoodbye!")
 
 
 if __name__ == "__main__":
