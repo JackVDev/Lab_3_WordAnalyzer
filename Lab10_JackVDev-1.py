@@ -6,6 +6,9 @@
 """
 
 from pathlib import Path
+import string
+
+textcleaner = str.maketrans("", "", string.punctuation)
 
 class WordAnalyzer:
     """
@@ -19,11 +22,22 @@ class WordAnalyzer:
     def process_file(self):
         #Count how many times each word appears in specified file
         try:
-            raw_text = self.__filepath.read_text(errors="replace")
+            text_raw = self.__filepath.read_text(encoding='utf-8').rstrip()
         except FileNotFoundError:
-            print("This file does not exist!") # figure out actual error prevention
-            
-        raise NotImplementedError # NOT FINISHED
+            return False # Signals to program that there was a problem.
+        else:
+            text_lines = text_raw.translate(textcleaner)
+            text_lines = text_lines.lower()
+            text_lines = text_lines.split()
+            self.__wordfreq = {} # Empties __wordfreq to ensure the count is accurate
+            for word in text_lines:
+                try:
+                    self.__wordfreq[word]
+                except KeyError:
+                    self.__wordfreq[word] = 1
+                else:
+                    self.__wordfreq[word] += 1
+        return True # Signals to program that process_file() is done without issues
     
     def print_report(self):
         # Print out results of process_file()
