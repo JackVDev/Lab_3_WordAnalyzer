@@ -41,4 +41,6 @@ class WordAnalyzer:
     
     def print_report(self):
         # Print out results of process_file()
-        raise NotImplementedError # NOT FINISHED
+        self.__wordfreq = dict(sorted(self.__wordfreq.items())) # Sorts __wordfreq alphabetically by key
+        for word, freq in self.__wordfreq.items():
+            print(f"{word:<15} :: {freq:>3}")
