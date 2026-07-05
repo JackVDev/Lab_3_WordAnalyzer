@@ -12,7 +12,8 @@ textcleaner = str.maketrans("", "", string.punctuation)
 
 class WordAnalyzer:
     """
-        Word Analyzer class UNFINISHED
+        WordAnalzyer Class, holds a filepath and dictionary containing a list of words and their frequencies
+        attributes: self.__filepath, self.__wordfreq={}
     """
 
     def __init__(self, filepath):
@@ -20,6 +21,11 @@ class WordAnalyzer:
         self.__wordfreq = {}
     
     def process_file(self):
+        """
+            Attepts to process the file given in self.__filepath
+            If the file does not exist (FileNotFoundError), returns False
+            If the file does exist, it processes the words and adds them to self.__wordfreq, returns True
+        """
         #Count how many times each word appears in specified file
         try:
             text_raw = self.__filepath.read_text(encoding='utf-8').rstrip()
@@ -40,6 +46,9 @@ class WordAnalyzer:
         return True # Signals to program that process_file() is done without issues
     
     def print_report(self):
+        """
+            Sorts and prints self.__wordfreq
+        """
         # Print out results of process_file()
         self.__wordfreq = dict(sorted(self.__wordfreq.items())) # Sorts __wordfreq alphabetically by key
         for word, freq in self.__wordfreq.items():
